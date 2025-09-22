@@ -1,0 +1,33 @@
+{
+  "name": "acme-ecommerce-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/acme-ecommerce-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/acme-ecommerce-e2e/cypress.config.ts",
+        "devServerTarget": "acme-ecommerce:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "acme-ecommerce:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "acme-ecommerce:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/acme-ecommerce-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["acme-ecommerce"]
+}
