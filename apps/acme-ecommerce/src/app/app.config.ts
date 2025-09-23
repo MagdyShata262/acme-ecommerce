@@ -1,17 +1,25 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, isDevMode } from '@angular/core';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
-import { appRoutes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStore } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { provideEffects } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+
+import { appRoutes } from './app.routes';
+import * as fromApp from './state/app.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
     provideAnimations(),
-    provideStore(reducers, { metaReducers })
-],
+    provideStore(fromApp.reducers), // ✅ Now correctly typed
+    provideEffects(),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+    }),
+  ],
 };
