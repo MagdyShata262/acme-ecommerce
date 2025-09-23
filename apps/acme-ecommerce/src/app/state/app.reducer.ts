@@ -10,5 +10,3 @@ export interface AppState {
 export const reducers: ActionReducerMap<AppState> = {
   // Later: cart: cartReducer, products: productsReducer
 };
-
-export const metaReducers = [];
