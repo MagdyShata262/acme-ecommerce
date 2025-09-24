@@ -7,8 +7,8 @@ import * as ProductsActions from './products.actions';
 
 @Injectable()
 export class ProductsEffects {
-  loadProducts$ = createEffect(() =>
-    { return this.actions$.pipe(
+  loadProducts$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(ProductsActions.loadProducts),
       mergeMap(() =>
         this.productService.getAll().pipe(
@@ -18,9 +18,25 @@ export class ProductsEffects {
           )
         )
       )
-    ) }
+    );
+  });
+  // In products.effects.ts
+  loadCategories$ = createEffect(() =>
+    // eslint-disable-next-line @ngrx/prefer-effect-callback-in-block-statement
+    this.actions$.pipe(
+      ofType(ProductsActions.loadCategories),
+      mergeMap(() =>
+        this.productService.getCategories().pipe(
+          map((categories) =>
+            ProductsActions.loadCategoriesSuccess({ categories })
+          ),
+          catchError((error) =>
+            of(ProductsActions.loadCategoriesFailure({ error: error.message }))
+          )
+        )
+      )
+    )
   );
-
   constructor(
     private actions$: Actions,
     private productService: ProductService

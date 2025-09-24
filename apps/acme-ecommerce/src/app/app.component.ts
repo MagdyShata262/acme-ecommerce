@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+/* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { NavComponent } from './nav/nav.component';
@@ -22,7 +23,7 @@ import * as ProductsActions from './products/products.actions';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'acme-ecommerce';
 
   private store = inject(Store);
@@ -31,12 +32,6 @@ export class AppComponent {
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.loadProducts());
-    // Debug
-    // this.products$.subscribe((products) => {
-    //   console.log('Products:', products);
-    // });
-    // this.loading$.subscribe((loading) => {
-    //   console.log('Loading:', loading);
-    // });
+    this.store.dispatch(ProductsActions.loadCategories()); // ✅
   }
 }

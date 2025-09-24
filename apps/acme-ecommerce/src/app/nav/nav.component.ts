@@ -8,7 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe, NgIf } from '@angular/common';
-
+import { Store } from '@ngrx/store';
+import { selectCategories } from '../products/products.selectors';
+import * as ProductsActions from '../products/products.actions';
 @Component({
   selector: 'acme-ecommerce-nav',
   templateUrl: './nav.component.html',
@@ -21,15 +23,21 @@ import { AsyncPipe, NgIf } from '@angular/common';
     MatListModule,
     MatIconModule,
     AsyncPipe,
-    NgIf
-  ]
+    NgIf,
+  ],
 })
 export class NavComponent {
   private breakpointObserver = inject(BreakpointObserver);
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  private store = inject(Store);
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result) => result.matches),
       shareReplay()
     );
+
+  categories$ = this.store.select(selectCategories);
+  ngOnInit() {
+    this.store.dispatch(ProductsActions.loadCategories());
+  }
 }

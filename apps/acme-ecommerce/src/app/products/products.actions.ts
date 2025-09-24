@@ -8,7 +8,16 @@ export const loadProductsSuccess = createAction(
   '[Products] Load Products Success',
   props<{ products: Product[] }>()
 );
+export const loadCategories = createAction('[Products] Load Categories');
+export const loadCategoriesSuccess = createAction(
+  '[Products] Load Categories Success',
+  props<{ categories: string[] }>()
+);
 export const loadProductsFailure = createAction(
   '[Products] Load Products Failure',
+  props<{ error: string }>()
+);
+export const loadCategoriesFailure = createAction(
+  '[Products] Load Categories Failure',
   props<{ error: string }>()
 );
