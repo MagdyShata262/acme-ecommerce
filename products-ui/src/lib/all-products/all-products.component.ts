@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'acme-ecommerce-all-products',
   standalone: true,
@@ -8,4 +8,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.scss'],
 })
-export class AllProductsComponent {}
+export class AllProductsComponent {
+  private route = inject(ActivatedRoute);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  category = this.route.snapshot.paramMap.get('category')!;
+}
