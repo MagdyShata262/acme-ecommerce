@@ -40,3 +40,32 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+/* apps/acme-ecommerce/src/styles.css */
+
+.sidenav-container {
+  height: 100vh; /* full viewport height */
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.main-content {
+  padding: 20px;
+  margin-left: 200px; /* match sidenav width */
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
