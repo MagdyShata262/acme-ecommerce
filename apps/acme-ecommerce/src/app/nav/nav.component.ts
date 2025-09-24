@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { selectCategories } from '../products/products.selectors';
 import * as ProductsActions from '../products/products.actions';
@@ -24,6 +24,8 @@ import * as ProductsActions from '../products/products.actions';
     MatIconModule,
     AsyncPipe,
     NgIf,
+    CommonModule,
+    NgFor,
   ],
 })
 export class NavComponent {
