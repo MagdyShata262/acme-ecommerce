@@ -10,6 +10,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { appRoutes } from './app.routes';
 import * as fromApp from './state/app.reducer';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,5 +23,6 @@ export const appConfig: ApplicationConfig = {
       maxAge: 25,
       logOnly: !isDevMode(),
     }),
+    provideHttpClient(),
   ],
 };
