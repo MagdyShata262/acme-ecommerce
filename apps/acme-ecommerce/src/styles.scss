@@ -59,11 +59,11 @@ body {
   top: 0;
   z-index: 1000;
 }
+
 .main-content {
   padding: 20px;
-  margin-left: 200px; /* match sidenav width */
+  margin-left: 200px; /* if you have a sidenav */
 }
-
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
