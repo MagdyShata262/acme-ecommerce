@@ -17,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideStore(fromApp.reducers), // ✅ Now correctly typed
     provideEffects(),
+
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
