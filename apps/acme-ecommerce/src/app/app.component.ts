@@ -23,6 +23,13 @@ export class AppComponent {
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.loadProducts());
+     // Debug
+  this.products$.subscribe(products => {
+    console.log('Products:', products);
+  });
+  this.loading$.subscribe(loading => {
+    console.log('Loading:', loading);
+  });
   }
 
 }
