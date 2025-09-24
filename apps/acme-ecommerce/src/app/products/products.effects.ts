@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { concatMap } from 'rxjs/operators';
-import { Observable, EMPTY } from 'rxjs';
-import { ProductsActions } from './products.actions';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { ProductService } from 'my-data-access';
+import * as ProductsActions from './products.actions';
 
 @Injectable()
 export class ProductsEffects {
+  loadProducts$ = createEffect(() =>
+    { return this.actions$.pipe(
+      ofType(ProductsActions.loadProducts),
+      mergeMap(() =>
+        this.productService.getAll().pipe(
+          map((products) => ProductsActions.loadProductsSuccess({ products })),
+          catchError((error) =>
+            of(ProductsActions.loadProductsFailure({ error: error.message }))
+          )
+        )
+      )
+    ) }
+  );
 
-
-  loadProductss$ = createEffect(() => {
-    return this.actions$.pipe(
-
-      ofType(ProductsActions.loadProductss),
-      /** An EMPTY observable only emits completion. Replace with your own observable API request */
-      concatMap(() => EMPTY as Observable<{ type: string }>)
-    );
-  });
-
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private productService: ProductService
+  ) {}
 }

@@ -1,24 +1,38 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
-import { ProductsActions } from './products.actions';
+// apps/acme-ecommerce/src/app/products/products.reducer.ts
+import { createReducer, on } from '@ngrx/store';
+import { Product } from 'my-data-access';
+import * as ProductsActions from './products.actions';
 
-export const productsFeatureKey = 'products';
-
-export interface State {
-
+// ✅ 1. Define the state interface
+export interface ProductsState {
+  products: Product[];
+  loading: boolean;
+  error: string | null;
 }
 
-export const initialState: State = {
-
+// ✅ 2. Define and export the initial state
+export const initialState: ProductsState = {
+  products: [],
+  loading: false,
+  error: null,
 };
 
-export const reducer = createReducer(
+// ✅ 3. Define the reducer
+export const productsReducer = createReducer(
   initialState,
-  on(ProductsActions.loadProductss, state => state),
-
+  on(ProductsActions.loadProducts, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(ProductsActions.loadProductsSuccess, (state, { products }) => ({
+    ...state,
+    loading: false,
+    products,
+  })),
+  on(ProductsActions.loadProductsFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }))
 );
-
-export const productsFeature = createFeature({
-  name: productsFeatureKey,
-  reducer,
-});
-

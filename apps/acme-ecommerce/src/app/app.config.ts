@@ -11,13 +11,15 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appRoutes } from './app.routes';
 // import * as fromApp from './state/app.reducer';
 import { provideHttpClient } from '@angular/common/http';
+import { ProductsEffects } from './products/products.effects';
+import { productsReducer } from './products/products.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
     provideAnimations(),
-    // provideStore(fromApp.reducers), // ✅ Now correctly typed
-    provideEffects(),
+     provideStore({ products: productsReducer }),
+    provideEffects([ProductsEffects]),
 
     provideStoreDevtools({
       maxAge: 25,

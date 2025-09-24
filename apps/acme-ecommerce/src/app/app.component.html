@@ -1,2 +1,13 @@
 <acme-ecommerce-nav> </acme-ecommerce-nav>
+
+<h2>Products</h2>
+<p *ngIf="loading$ | async">⏳ Loading...</p>
+<div *ngFor="let p of products$ | async">
+  <img [src]="p.image" [alt]="p.title" width="100" />
+  <h3>{{ p.title }}</h3>
+  <p>{{ p.description }}</p>
+  <p>{{ p.price }}</p>
+  <!-- <p>${{ p.price }} ⭐ {{ p.rating.rate }} ({{ p.rating.count }})</p> -->
+</div>
+
 <router-outlet></router-outlet>
