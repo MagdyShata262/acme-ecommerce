@@ -1,6 +1,7 @@
 import { ApplicationConfig, isDevMode } from '@angular/core';
 import {
   provideRouter,
+  withComponentInputBinding,
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -16,9 +17,13 @@ import { productsReducer } from './products/products.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+    provideRouter(
+      appRoutes,
+      withEnabledBlockingInitialNavigation(),
+      withComponentInputBinding()
+    ),
     provideAnimations(),
-     provideStore({ products: productsReducer }),
+    provideStore({ products: productsReducer }),
     provideEffects([ProductsEffects]),
 
     provideStoreDevtools({
