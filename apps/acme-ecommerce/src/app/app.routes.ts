@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { AllProductsComponent } from '@acme/products-ui';
+
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [

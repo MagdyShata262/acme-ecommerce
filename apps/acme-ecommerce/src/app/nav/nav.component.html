@@ -12,7 +12,7 @@
       <a
         mat-list-item
         *ngFor="let category of categories$ | async"
-        [routerLink]="['./categories' + category]"
+        [routerLink]="['/categories' + category]"
         routerLinkActive="active"
       >
         {{ category }}
