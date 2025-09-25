@@ -27,4 +27,14 @@ export class ProductService {
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(`${this.API_URL}/categories`);
   }
+
+// In your ProductService or component
+getOptimizedImageUrl(imageUrl: string): string {
+  return imageUrl.replace('_SL1500_', '_SL400_'); // or _SL300_, _SL200_
+}
+
+
+
+
+
 }
