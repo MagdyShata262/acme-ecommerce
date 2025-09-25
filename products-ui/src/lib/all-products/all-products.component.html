@@ -3,11 +3,11 @@
 <div class="products-grid">
   <div class="product-card" *ngFor="let p of products$ | async">
     <img
-      [src]="getOptimizedImageUrl(p.image)"
+      [src]="p.image"
       [alt]="p.title"
       class="product-image"
       loading="lazy"
-        (error)="onImageError($event)"
+      (error)="onImageError($event)"
     />
     <div class="product-info">
       <h3 class="product-title">{{ p.title }}</h3>
