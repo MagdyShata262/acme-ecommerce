@@ -11,7 +11,7 @@ import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { selectCategories } from '../products/products.selectors';
 import * as ProductsActions from '../products/products.actions';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'acme-ecommerce-nav',
   templateUrl: './nav.component.html',
@@ -29,7 +29,8 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
     NgFor,
     RouterModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    RouterOutlet
   ],
 })
 export class NavComponent {

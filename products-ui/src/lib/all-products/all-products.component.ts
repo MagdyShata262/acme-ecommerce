@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
@@ -10,6 +11,6 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 })
 export class AllProductsComponent {
   private route = inject(ActivatedRoute);
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  category = this.route.snapshot.paramMap.get('category')!;
+
+  category = this.route.snapshot.paramMap.get('category') || 'All';
 }
