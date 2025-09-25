@@ -22,18 +22,18 @@ export class AllProductsComponent implements OnInit {
   category = 'All';
   products$ = this.store.select(selectProducts);
   loading$ = this.store.select(selectLoading);
-
   ngOnInit() {
-    // Get category from URL (e.g., /categories/electronics → 'electronics')
-    this.category = this.route.snapshot.paramMap.get('category') || 'All';
+    // ✅ Subscribe to paramMap to react to route changes
+    this.route.paramMap.subscribe((params) => {
+      this.category = params.get('category') || 'All';
 
-    // ✅ Dispatch the correct action based on category
-    if (this.category === 'All') {
-      this.store.dispatch(ProductsActions.loadProducts());
-    } else {
-      this.store.dispatch(
-        ProductsActions.loadProductsByCategory({ category: this.category })
-      );
-    }
+      if (this.category === 'All') {
+        this.store.dispatch(ProductsActions.loadProducts());
+      } else {
+        this.store.dispatch(
+          ProductsActions.loadProductsByCategory({ category: this.category })
+        );
+      }
+    });
   }
 }
