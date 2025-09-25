@@ -35,38 +35,33 @@ export class AllProductsComponent implements OnInit {
         );
       }
     });
+
+    this.products$.subscribe((products) => {
+      if (products && products.length > 0) {
+        const firstImage = this.getOptimizedImageUrl(products[0].image);
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = firstImage;
+        document.head.appendChild(link);
+      }
+    });
   }
 
-  // AllProductsComponent.ts
-
-
-
-
-
-// Add this method to your component
-getOptimizedImageUrl(imageUrl: string): string {
-  // Try common size variants for Fake Store API
-  const sizes = [
-    '_SL400_', '_SX400_', '_SY400_',
-    '_SL300_', '_SX300_', '_SY300_',
-    '_SL200_', '_SX200_', '_SY200_'
-  ];
-
-  for (const size of sizes) {
-    if (imageUrl.includes('_SL1500_') || imageUrl.includes('_AC_')) {
-      return imageUrl.replace('_SL1500_', size).replace('_AC_', size);
+  getOptimizedImageUrl(imageUrl: string): string {
+    const sizes = [
+      '_SL400_',
+      '_SX400_',
+      '_SY400_',
+      '_SL300_',
+      '_SX300_',
+      '_SY300_',
+    ];
+    for (const size of sizes) {
+      if (imageUrl.includes('_SL1500_') || imageUrl.includes('_AC_')) {
+        return imageUrl.replace('_SL1500_', size).replace('_AC_', size);
+      }
     }
-    if (imageUrl.includes('_SX679_')) {
-      return imageUrl.replace('_SX679_', size);
-    }
+    return imageUrl;
   }
-
-  return imageUrl; // fallback
-}
-
-
-
-
-
-
 }
