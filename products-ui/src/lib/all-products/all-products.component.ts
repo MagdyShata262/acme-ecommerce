@@ -48,20 +48,42 @@ export class AllProductsComponent implements OnInit {
     });
   }
 
-  getOptimizedImageUrl(imageUrl: string): string {
-    const sizes = [
-      '_SL400_',
-      '_SX400_',
-      '_SY400_',
-      '_SL300_',
-      '_SX300_',
-      '_SY300_',
-    ];
-    for (const size of sizes) {
-      if (imageUrl.includes('_SL1500_') || imageUrl.includes('_AC_')) {
-        return imageUrl.replace('_SL1500_', size).replace('_AC_', size);
-      }
+  // In AllProductsComponent.ts
+getOptimizedImageUrl(imageUrl: string): string {
+  // ✅ Step 1: Trim whitespace
+  let cleanUrl = imageUrl.trim();
+
+  // ✅ Step 2: Remove trailing _t.png, _t.jpg, etc.
+  cleanUrl = cleanUrl.replace(/_t\.(png|jpg|jpeg)$/i, '');
+
+  // ✅ Step 3: Try common working size variants
+  const sizes = [
+    '_SL400_', '_SX400_', '_SY400_',
+    '_SL300_', '_SX300_', '_SY300_',
+    '_SL200_', '_SX200_', '_SY200_'
+  ];
+
+  for (const size of sizes) {
+    if (cleanUrl.includes('_AC_')) {
+      return cleanUrl.replace('_AC_', size);
     }
-    return imageUrl;
+    if (cleanUrl.includes('_SL1500_')) {
+      return cleanUrl.replace('_SL1500_', size);
+    }
+    if (cleanUrl.includes('_SX679_')) {
+      return cleanUrl.replace('_SX679_', size);
+    }
+    if (cleanUrl.includes('_SY879_')) {
+      return cleanUrl.replace('_SY879_', size);
+    }
   }
+
+  // ✅ Step 4: Fallback — return cleaned URL if no replacement found
+  return cleanUrl;
+}
+
+onImageError(event: any) {
+  event.target.src = 'https://via.placeholder.com/300x300?text=No+Image';
+  event.target.alt = 'Image not available';
+}
 }
