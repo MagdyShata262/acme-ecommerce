@@ -9,9 +9,16 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { selectCategories } from '../products/products.selectors';
-import * as ProductsActions from '../products/products.actions';
-import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
+
+import * as ProductsActions from 'products/src/products/products.actions';
+import { selectCategories } from 'products/src/products/products.selectors';
 @Component({
   selector: 'acme-ecommerce-nav',
   templateUrl: './nav.component.html',
@@ -30,7 +37,7 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
     RouterModule,
     RouterLink,
     RouterLinkActive,
-    RouterOutlet
+    RouterOutlet,
   ],
 })
 export class NavComponent {

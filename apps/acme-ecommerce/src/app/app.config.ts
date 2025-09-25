@@ -11,10 +11,10 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { appRoutes } from './app.routes';
 // import * as fromApp from './state/app.reducer';
-import { provideHttpClient } from '@angular/common/http';
-import { ProductsEffects } from './products/products.effects';
-import { productsReducer } from './products/products.reducer';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { productsReducer } from 'products/src/products/products.reducer';
 
+import { ProductsEffects } from 'products/src/products/products.effects';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(
@@ -30,6 +30,6 @@ export const appConfig: ApplicationConfig = {
       maxAge: 25,
       logOnly: !isDevMode(),
     }),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
   ],
 };

@@ -4,9 +4,12 @@ import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { NavComponent } from './nav/nav.component';
 import { Store } from '@ngrx/store';
-import { selectProducts, selectLoading } from './products/products.selectors';
+import {
+  selectProducts,
+  selectLoading,
+} from '../../../../products/src/products/products.selectors';
 import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
-import * as ProductsActions from './products/products.actions';
+import * as ProductsActions from '../../../../products/src/products/products.actions';
 
 @Component({
   standalone: true,

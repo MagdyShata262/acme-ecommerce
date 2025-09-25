@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@acme/products": ["products/src/index.ts"],
       "@acme/products-ui": ["products-ui/src/index.ts"],
       "my-data-access": ["data-access/src/index.ts"],
       "my-design-system": ["ui/src/index.ts"]

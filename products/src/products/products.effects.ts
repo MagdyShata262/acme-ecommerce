@@ -37,6 +37,22 @@ export class ProductsEffects {
       )
     )
   );
+  // products.effects.ts
+  loadProductsByCategory$ = createEffect(() =>
+    // eslint-disable-next-line @ngrx/prefer-effect-callback-in-block-statement
+    this.actions$.pipe(
+      ofType(ProductsActions.loadProductsByCategory),
+      mergeMap(({ category }) =>
+        this.productService.getByCategory(category).pipe(
+          map((products) => ProductsActions.loadProductsSuccess({ products })),
+          catchError((error) =>
+            of(ProductsActions.loadProductsFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private productService: ProductService

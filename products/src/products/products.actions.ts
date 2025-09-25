@@ -21,3 +21,7 @@ export const loadCategoriesFailure = createAction(
   '[Products] Load Categories Failure',
   props<{ error: string }>()
 );
+export const loadProductsByCategory = createAction(
+  '[Products] Load Products By Category',
+  props<{ category: string }>()
+);
