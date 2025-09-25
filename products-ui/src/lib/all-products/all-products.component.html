@@ -1,2 +1,18 @@
-<p>all-products works!</p>
-<h2>Products in "{{ category  }}"</h2>
+
+<h2>Products in "{{ category }}"</h2>
+    <p *ngIf="loading$ | async">⏳ Loading...</p>
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let p of products$ | async">
+        <img [src]="p.image" [alt]="p.title" class="product-image" />
+        <div class="product-info">
+          <h3 class="product-title">{{ p.title }}</h3>
+          <p class="product-description">{{ p.description }}</p>
+          <div class="product-footer">
+            <span class="product-price">${{ p.price }}</span>
+            <div class="product-rating">
+              ⭐ {{ p.rating?.rate }} ({{ p.rating?.count }})
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
